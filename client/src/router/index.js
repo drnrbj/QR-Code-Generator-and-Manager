@@ -5,6 +5,7 @@ const Dashboard = () => import('../pages/Dashboard.vue')
 const Generate = () => import('../pages/Generate.vue')
 const History = () => import('../pages/History.vue')
 const Statistics = () => import('../pages/Statistics.vue')
+const QRDetail = () => import('../pages/QRDetail.vue') // Placeholder for Phase 5
 
 /**
  * Route Configuration
@@ -36,6 +37,15 @@ const routes = [
     meta: {
       title: 'QR Code History',
       description: 'View generated QR codes history'
+    }
+  },
+  {
+    path: '/history/:id',
+    name: 'QRDetail',
+    component: QRDetail,
+    meta: {
+      title: 'QR Code Details',
+      description: 'View QR code details'
     }
   },
   {
