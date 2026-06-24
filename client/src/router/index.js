@@ -14,39 +14,19 @@ const QRDetail = () => import('../pages/QRDetail.vue') // Placeholder for Phase 
 const routes = [
   {
     path: '/',
-    name: 'Dashboard',
-    component: Dashboard,
-    meta: {
-      title: 'Dashboard',
-      description: 'QR Code Manager Dashboard'
-    }
+    redirect: '/generate'  // or '/history' - whichever makes more sense
   },
   {
     path: '/generate',
     name: 'Generate',
-    component: Generate,
-    meta: {
-      title: 'Generate QR Code',
-      description: 'Create new QR codes'
-    }
+    component: () => import('../pages/Generate.vue'),
+    meta: { title: 'Generate QR Code' }
   },
   {
     path: '/history',
     name: 'History',
-    component: History,
-    meta: {
-      title: 'QR Code History',
-      description: 'View generated QR codes history'
-    }
-  },
-  {
-    path: '/history/:id',
-    name: 'QRDetail',
-    component: QRDetail,
-    meta: {
-      title: 'QR Code Details',
-      description: 'View QR code details'
-    }
+    component: () => import('../pages/History.vue'),
+    meta: { title: 'QR Code History' }
   },
   {
     // Catch all route for 404 pages

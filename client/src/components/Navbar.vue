@@ -188,7 +188,6 @@ const StatsIcon = {
 
 // Navigation links configuration
 const navLinks = [
-  { name: 'Dashboard', path: '/' },
   { name: 'Generate', path: '/generate' },
   { name: 'History', path: '/history' },
 ]
