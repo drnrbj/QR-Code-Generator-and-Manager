@@ -6,14 +6,43 @@
         <div class="flex items-center">
           <router-link to="/" class="flex items-center space-x-3">
             <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center transform transition-transform duration-200 hover:scale-110">
-              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                      d="M12 4v1m6 11h2m-6 0h-2m4 0h-2m4-6V7m-4-4v1m6 11h2m-6 0h-2m-2 0h-2m4 0h2m-2-6v6m-4-4v1"/>
+              <!-- QR Code Logo -->
+              <svg class="w-6 h-6" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Top-left finder pattern -->
+                <rect x="1" y="1" width="10" height="10" rx="1.5" fill="white"/>
+                <rect x="2.5" y="2.5" width="7" height="7" rx="0.5" fill="#2563EB"/>
+                <rect x="4" y="4" width="4" height="4" rx="0.3" fill="white"/>
+                <!-- Top-right finder pattern -->
+                <rect x="15" y="1" width="10" height="10" rx="1.5" fill="white"/>
+                <rect x="16.5" y="2.5" width="7" height="7" rx="0.5" fill="#2563EB"/>
+                <rect x="18" y="4" width="4" height="4" rx="0.3" fill="white"/>
+                <!-- Bottom-left finder pattern -->
+                <rect x="1" y="15" width="10" height="10" rx="1.5" fill="white"/>
+                <rect x="2.5" y="16.5" width="7" height="7" rx="0.5" fill="#2563EB"/>
+                <rect x="4" y="18" width="4" height="4" rx="0.3" fill="white"/>
+                <!-- Timing + data dots -->
+                <rect x="12" y="4" width="2" height="2" rx="0.3" fill="white"/>
+                <rect x="4" y="12" width="2" height="2" rx="0.3" fill="white"/>
+                <rect x="8" y="12" width="2" height="2" rx="0.3" fill="white"/>
+                <rect x="12" y="12" width="2" height="2" rx="0.3" fill="white"/>
+                <rect x="16" y="12" width="2" height="2" rx="0.3" fill="white"/>
+                <rect x="20" y="12" width="2" height="2" rx="0.3" fill="white"/>
+                <rect x="24" y="12" width="2" height="2" rx="0.3" fill="white"/>
+                <rect x="12" y="8" width="2" height="2" rx="0.3" fill="white"/>
+                <rect x="16" y="16" width="2" height="2" rx="0.3" fill="white"/>
+                <rect x="20" y="16" width="2" height="2" rx="0.3" fill="white"/>
+                <rect x="20" y="20" width="2" height="2" rx="0.3" fill="white"/>
+                <rect x="16" y="20" width="2" height="2" rx="0.3" fill="white"/>
+                <rect x="20" y="24" width="2" height="2" rx="0.3" fill="white"/>
+                <rect x="24" y="20" width="2" height="2" rx="0.3" fill="white"/>
+                <rect x="24" y="24" width="2" height="2" rx="0.3" fill="white"/>
+                <rect x="12" y="16" width="2" height="2" rx="0.3" fill="white"/>
+                <rect x="12" y="20" width="2" height="2" rx="0.3" fill="white"/>
+                <rect x="12" y="24" width="2" height="2" rx="0.3" fill="white"/>
               </svg>
             </div>
             <div>
-              <span class="text-xl font-bold text-gray-800">QR Manager</span>
-              <span class="hidden sm:block text-xs text-gray-500">Generator & Manager</span>
+              <span class="text-xl font-bold text-gray-800">QR Generator</span>
             </div>
           </router-link>
         </div>
