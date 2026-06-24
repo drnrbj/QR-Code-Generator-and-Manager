@@ -4,14 +4,17 @@
       <div class="flex justify-between h-16">
         <!-- Logo and Brand -->
         <div class="flex items-center">
-          <router-link to="/" class="flex items-center space-x-2">
-            <div class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
-              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <router-link to="/" class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center transform transition-transform duration-200 hover:scale-110">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                       d="M12 4v1m6 11h2m-6 0h-2m4 0h-2m4-6V7m-4-4v1m6 11h2m-6 0h-2m-2 0h-2m4 0h2m-2-6v6m-4-4v1"/>
               </svg>
             </div>
-            <span class="text-xl font-bold text-gray-800">QR Manager</span>
+            <div>
+              <span class="text-xl font-bold text-gray-800">QR Manager</span>
+              <span class="hidden sm:block text-xs text-gray-500">Generator & Manager</span>
+            </div>
           </router-link>
         </div>
 
@@ -21,7 +24,7 @@
             v-for="link in navLinks" 
             :key="link.path"
             :to="link.path"
-            class="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+            class="relative px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 group"
             :class="isActive(link.path) ? 
               'bg-primary-50 text-primary-700' : 
               'text-gray-600 hover:bg-gray-50 hover:text-gray-900'"
@@ -30,6 +33,11 @@
               <component :is="link.icon" class="w-4 h-4" />
               <span>{{ link.name }}</span>
             </span>
+            <!-- Active indicator -->
+            <span 
+              v-if="isActive(link.path)"
+              class="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-600 rounded-full"
+            />
           </router-link>
         </div>
 
@@ -39,13 +47,13 @@
             @click="isMobileMenuOpen = !isMobileMenuOpen"
             class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 
                    hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 
-                   focus:ring-inset focus:ring-primary-500"
+                   focus:ring-inset focus:ring-primary-500 transition-colors duration-200"
+            aria-label="Toggle menu"
           >
-            <span class="sr-only">Open main menu</span>
             <!-- Hamburger icon -->
             <svg 
               v-if="!isMobileMenuOpen"
-              class="block h-6 w-6" 
+              class="h-6 w-6" 
               fill="none" 
               stroke="currentColor" 
               viewBox="0 0 24 24"
@@ -56,7 +64,7 @@
             <!-- Close icon -->
             <svg 
               v-else
-              class="block h-6 w-6" 
+              class="h-6 w-6" 
               fill="none" 
               stroke="currentColor" 
               viewBox="0 0 24 24"
@@ -70,10 +78,10 @@
     </div>
 
     <!-- Mobile Navigation Menu -->
-    <transition name="slide-down">
+    <Transition name="slide-down">
       <div 
         v-if="isMobileMenuOpen"
-        class="md:hidden border-t border-gray-200"
+        class="md:hidden border-t border-gray-200 bg-white"
       >
         <div class="px-2 pt-2 pb-3 space-y-1">
           <router-link 
@@ -81,30 +89,30 @@
             :key="link.path"
             :to="link.path"
             @click="isMobileMenuOpen = false"
-            class="block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
+            class="block px-3 py-2 rounded-md text-base font-medium transition-all duration-200"
             :class="isActive(link.path) ? 
-              'bg-primary-50 text-primary-700' : 
-              'text-gray-600 hover:bg-gray-50 hover:text-gray-900'"
+              'bg-primary-50 text-primary-700 border-l-4 border-primary-600' : 
+              'text-gray-600 hover:bg-gray-50 hover:text-gray-900 border-l-4 border-transparent'"
           >
-            <span class="flex items-center space-x-2">
+            <span class="flex items-center space-x-3">
               <component :is="link.icon" class="w-5 h-5" />
               <span>{{ link.name }}</span>
             </span>
           </router-link>
         </div>
       </div>
-    </transition>
+    </Transition>
   </nav>
 </template>
 
 <script setup>
-import { ref, h, computed } from 'vue'
+import { ref, h } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const isMobileMenuOpen = ref(false)
 
-// SVG icon components
+// SVG icon components using render functions
 const DashboardIcon = {
   render() {
     return h('svg', {
