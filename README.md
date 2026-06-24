@@ -10,13 +10,6 @@ A full-stack application for generating, managing, and tracking QR codes. Suppor
 
 ---
 
-## Prerequisites
-
-- Node.js v16 or higher
-- MongoDB v5 or higher
-
----
-
 ## Installation
 
 ```bash
