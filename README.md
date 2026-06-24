@@ -1,35 +1,65 @@
-# QR Code Generator and Manager
+# QR Code Generator & Manager
 
-A full-stack application for generating, managing, and tracking QR codes.
+A full-stack application for generating, managing, and tracking QR codes. Supports URL, Plain Text, Email, Phone Number, and WiFi QR codes with customizable colors and sizes.
 
-## Tech Stack
-- **Frontend:** Vue.js 3, Tailwind CSS
-- **Backend:** Node.js, Express.js
-- **Database:** MongoDB with Mongoose ODM
+**Tech Stack:** Vue.js 3, Express.js, MongoDB, Tailwind CSS, Chart.js
 
-## Features
-- Generate QR codes for URLs, Plain Text, Email, Phone Numbers, and WiFi
-- View history of all generated QR codes
-- Dashboard with statistics
-- Customizable QR code colors and sizes
+---
+
+## Prerequisites
+
+- Node.js v16 or higher
+- MongoDB v5 or higher
+
+---
 
 ## Installation
 
-1. Clone the repository
-2. Run `npm run install-all` to install all dependencies
-3. Make sure MongoDB is running locally on port 27017
-4. Run `npm run dev` to start both frontend and backend
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/qr-code-manager.git
+cd qr-code-manager
+
+# Install all dependencies
+npm run install-all
+```
+
+---
 
 ## Environment Variables
 
-Create a `.env` file in the server directory with:
+Create a `.env` file in the **server** directory:
+
+```env
 PORT=5000
 MONGODB_URI=mongodb://localhost:27017/qr-code-manager
+```
 
-## Available Scripts
+Create a `.env` file in the **client** directory:
 
-- `npm run dev` - Start both client and server in development mode
-- `npm run server` - Start only the server
-- `npm run client` - Start only the client
-- `npm run build` - Build the client for production
-- `npm start` - Start the server in production mode
+```env
+VITE_API_URL=http://localhost:5000/api
+```
+
+---
+
+## Seed Database (Optional)
+
+```bash
+npm run seed
+```
+
+---
+
+## Running the App
+
+```bash
+# Start both frontend and backend
+npm run dev
+```
+
+| Service       | URL                          |
+|---------------|------------------------------|
+| Frontend      | http://localhost:5173         |
+| Backend API   | http://localhost:5000         |
+| Health Check  | http://localhost:5000/api/health |
