@@ -4,7 +4,6 @@
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
       <div>
         <h1 class="text-3xl font-bold text-gray-900 mb-2">History</h1>
-        <p class="text-gray-600">Browse and manage your generated QR codes</p>
       </div>
       <!-- Total Count Badge -->
       <div v-if="!loading && !error" class="mt-4 sm:mt-0">
