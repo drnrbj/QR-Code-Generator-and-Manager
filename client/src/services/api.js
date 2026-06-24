@@ -5,8 +5,8 @@ import axios from 'axios';
  * Base URL points to the Express backend server
  */
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api',
-  timeout: 10000, // 10 seconds timeout
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
+  timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
   }
