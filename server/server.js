@@ -1,7 +1,10 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const mongoose = require('mongoose');
 const connectDB = require('./config/db');
+const qrCodeRoutes = require('./routes/qrCodeRoutes');
+const errorHandler = require('./middleware/errorHandler');
 
 // Load environment variables from .env file
 dotenv.config();
@@ -14,16 +17,22 @@ connectDB();
 
 // Middleware setup
 app.use(cors({
-  origin: 'http://localhost:5173', // Vite default port
+  origin: process.env.CLIENT_URL || 'http://localhost:5173',
   credentials: true
 }));
 
-// Body parser middleware
+// Increase JSON payload limit for base64 QR images
 app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// API Routes will be added in Phase 2
-// We'll import and use route files here
+// Request logging middleware
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.originalUrl}`);
+  next();
+});
+
+// API Routes
+app.use('/api/qrcodes', qrCodeRoutes);
 
 // Health check endpoint for API monitoring
 app.get('/api/health', (req, res) => {
@@ -31,47 +40,52 @@ app.get('/api/health', (req, res) => {
     status: 'OK',
     timestamp: new Date().toISOString(),
     uptime: process.uptime(),
-    database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected'
+    database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
+    environment: process.env.NODE_ENV || 'development'
   };
   
-  console.log('Health check requested:', healthcheck);
+  console.log('🏥 Health check requested');
   res.status(200).json(healthcheck);
 });
 
-// Error handling middleware for 404 routes
+// 404 handler for undefined routes
 app.use((req, res, next) => {
-  console.log(`404 - Route not found: ${req.originalUrl}`);
-  res.status(404).json({ 
-    error: 'Route not found',
-    path: req.originalUrl 
+  console.log(`⚠️ 404 - Route not found: ${req.method} ${req.originalUrl}`);
+  res.status(404).json({
+    success: false,
+    message: `Route ${req.method} ${req.originalUrl} not found`,
+    error: 'NOT_FOUND'
   });
 });
 
 // Global error handling middleware
-app.use((err, req, res, next) => {
-  console.error('Server error:', err.stack);
-  res.status(500).json({ 
-    error: 'Internal server error',
-    message: process.env.NODE_ENV === 'development' ? err.message : 'Something went wrong'
-  });
-});
+app.use(errorHandler);
 
 // Define port and start server
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server is running on http://localhost:${PORT}`);
-  console.log(`📝 Environment: ${process.env.NODE_ENV || 'development'}`);
+const server = app.listen(PORT, () => {
+  console.log('🚀 Server is running!');
+  console.log(`📡 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`🔗 URL: http://localhost:${PORT}`);
   console.log(`🏥 Health check: http://localhost:${PORT}/api/health`);
+  console.log(`📊 API Base: http://localhost:${PORT}/api/qrcodes`);
 });
 
 // Handle unhandled promise rejections
 process.on('unhandledRejection', (err) => {
-  console.log('UNHANDLED REJECTION! 💥 Shutting down...');
-  console.log(err.name, err.message);
+  console.error('💥 UNHANDLED REJECTION! Shutting down...');
+  console.error(err.name, err.message);
   server.close(() => {
     process.exit(1);
   });
+});
+
+// Handle uncaught exceptions
+process.on('uncaughtException', (err) => {
+  console.error('💥 UNCAUGHT EXCEPTION! Shutting down...');
+  console.error(err.name, err.message);
+  process.exit(1);
 });
 
 module.exports = app; // Export for testing purposes
