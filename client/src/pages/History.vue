@@ -4,9 +4,7 @@
     <!-- Page Header -->
     <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
       <div>
-        <p class="text-xs font-semibold uppercase tracking-widest text-blue-500 mb-1">QR Management</p>
         <h1 class="text-3xl font-bold text-gray-900 leading-tight">History</h1>
-        <p class="text-sm text-gray-400 mt-1">Browse, search, and manage all your saved QR codes.</p>
       </div>
       <div v-if="!loading && !error">
         <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100">
@@ -39,7 +37,7 @@
           <button
             v-if="searchQuery"
             @click="clearSearch"
-            class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
+            class="absolute inset-y-0 right-0 pr-3.5 flex items-center justify-center text-gray-400 hover:text-gray-600 transition-colors"
           >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
