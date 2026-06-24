@@ -1,11 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-// Lazy load page components for better performance
-const Dashboard = () => import('../pages/Dashboard.vue')
 const Generate = () => import('../pages/Generate.vue')
 const History = () => import('../pages/History.vue')
-const Statistics = () => import('../pages/Statistics.vue')
-const QRDetail = () => import('../pages/QRDetail.vue') // Placeholder for Phase 5
+const QRDetail = () => import('../pages/QRDetail.vue')
 
 /**
  * Route Configuration
@@ -14,7 +11,7 @@ const QRDetail = () => import('../pages/QRDetail.vue') // Placeholder for Phase 
 const routes = [
   {
     path: '/',
-    redirect: '/generate'  // or '/history' - whichever makes more sense
+    redirect: '/generate'
   },
   {
     path: '/generate',
