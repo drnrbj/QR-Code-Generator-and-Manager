@@ -141,8 +141,11 @@
             </div>
 
             <!-- Action Buttons -->
-            <div class="flex flex-wrap gap-3 pt-4 border-t border-gray-200">
-              <button type="submit" class="btn-primary flex items-center space-x-2" :disabled="generating">
+            <div class="flex flex-wrap justify-end gap-3 pt-4 border-t border-gray-200">
+              <button type="submit" class="flex items-center space-x-2 bg-blue-600 text-white px-6 py-2 rounded-lg
+           hover:bg-blue-700 transition-colors duration-200
+           focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+           disabled:opacity-50 disabled:cursor-not-allowed" :disabled="generating">
                 <svg v-if="generating" class="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
                   <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
                   <path class="opacity-75" fill="currentColor"
@@ -151,21 +154,23 @@
                 <span>{{ generating ? 'Generating...' : 'Generate QR' }}</span>
               </button>
 
-              <button type="button" @click="saveQR" class="bg-green-600 text-white px-6 py-2 rounded-lg 
-                       hover:bg-green-700 transition-colors duration-200 
-                       focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2
-                       disabled:opacity-50 disabled:cursor-not-allowed" :disabled="!generatedQR || saving">
+              <button type="button" @click="saveQR" class="bg-blue-100 text-blue-700 px-6 py-2 rounded-lg
+           hover:bg-blue-200 transition-colors duration-200
+           focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+           disabled:opacity-50 disabled:cursor-not-allowed" :disabled="!generatedQR || saving">
                 {{ saving ? 'Saving...' : 'Save QR' }}
               </button>
 
-              <button type="button" @click="downloadQR" class="bg-teal-600 text-white px-6 py-2 rounded-lg 
-                       hover:bg-teal-700 transition-colors duration-200 
-                       focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2
-                       disabled:opacity-50 disabled:cursor-not-allowed" :disabled="!generatedQR">
+              <button type="button" @click="downloadQR" class="bg-blue-100 text-blue-700 px-6 py-2 rounded-lg
+           hover:bg-blue-200 transition-colors duration-200
+           focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+           disabled:opacity-50 disabled:cursor-not-allowed" :disabled="!generatedQR">
                 Download
               </button>
 
-              <button type="button" @click="clearForm" class="btn-secondary">
+              <button type="button" @click="clearForm" class="bg-gray-100 text-gray-600 px-6 py-2 rounded-lg
+           hover:bg-gray-200 transition-colors duration-200
+           focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2">
                 Clear
               </button>
             </div>
