@@ -129,8 +129,10 @@
                 </label>
                 <div class="flex items-center space-x-3">
                   <input v-model="form.foregroundColor" type="color"
-                    class="w-12 h-10 rounded border border-gray-300 cursor-pointer" />
-                  <span class="text-sm text-gray-600">{{ form.foregroundColor }}</span>
+                    class="w-12 h-10 rounded cursor-pointer border-none outline-none" />
+                  <span class="text-sm text-gray-600">
+                    {{ form.foregroundColor }}
+                  </span>
                 </div>
               </div>
 
@@ -141,8 +143,10 @@
                 </label>
                 <div class="flex items-center space-x-3">
                   <input v-model="form.backgroundColor" type="color"
-                    class="w-12 h-10 rounded border border-gray-300 cursor-pointer" />
-                  <span class="text-sm text-gray-600">{{ form.backgroundColor }}</span>
+                    class="w-12 h-10 rounded cursor-pointer border-none outline-none" />
+                  <span class="text-sm text-gray-600">
+                    {{ form.backgroundColor }}
+                  </span>
                 </div>
               </div>
             </div>
@@ -315,14 +319,14 @@ const contentPlaceholder = computed(() => {
 const onTypeChange = () => {
   // Reset content when switching types
   form.content = '';
-  
+
   // Reset WiFi fields when switching away from WiFi
   if (form.qrType !== 'WiFi') {
     wifiConfig.ssid = '';
     wifiConfig.password = '';
     wifiConfig.security = 'WPA2';
   }
-  
+
   // Clear validation errors on type change
   Object.keys(validationErrors).forEach(key => delete validationErrors[key]);
 };
